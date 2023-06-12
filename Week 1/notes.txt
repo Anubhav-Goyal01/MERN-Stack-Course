@@ -1,5 +1,5 @@
 - NodeJS is not a framework or a language, its a JavaScript Runtime
-- JavaScript is single threaded and loosely typed
+- JavaScript is single threaded (runs on a single core) and loosely typed
 - JavaScript is interpreted language
 - To take advantage of the asynchronous nature of JavaScript, we need callbacks
 - Asynchronous tasks is JS don't necessarily run on the same thread as the main JS execution.
