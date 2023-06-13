@@ -3,3 +3,4 @@
 - JavaScript is interpreted language
 - To take advantage of the asynchronous nature of JavaScript, we need callbacks
 - Asynchronous tasks is JS don't necessarily run on the same thread as the main JS execution.
+- var is function scope, it does not care about blocks
