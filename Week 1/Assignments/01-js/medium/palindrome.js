@@ -7,7 +7,18 @@
 */
 
 function isPalindrome(str) {
-  return true;
+  let strLower = str.toLowerCase()
+  strLower = strLower.replace(/[^a-zA-Z]/g, '');
+  let j = strLower.length - 1
+  for (let i = 0; i <= j; i++){
+    if (strLower[i] === strLower[j]) {
+      j -= 1
+    }
+    else return false
+  }
+  return true
 }
+
+// console.log(isPalindrome("race car"))
 
 module.exports = isPalindrome;
