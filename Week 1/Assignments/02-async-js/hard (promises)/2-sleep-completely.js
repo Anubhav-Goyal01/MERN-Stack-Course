@@ -4,5 +4,12 @@
  */
 
 function sleep (seconds) {
+    let startTime = new Date().getTime()
+    while (new Date().getTime() - startTime < seconds * 1000){
 
+    }
 }
+
+console.log("Before sleep")
+sleep(3)
+console.log("Finished sleeping")

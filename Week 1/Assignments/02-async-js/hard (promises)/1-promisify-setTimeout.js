@@ -3,4 +3,11 @@
 */
 
 function wait(n) {
+    let promise = new Promise((resolve) => {
+        setTimeout(resolve, n * 1000)
+    }).then(() => {
+        console.log(`${n} seconds have passed`);
+    })
 }
+
+wait(3)
