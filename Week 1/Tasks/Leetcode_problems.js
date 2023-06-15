@@ -49,3 +49,75 @@ var missingNumber = function(nums) {
         return i
     }
 };
+/*
+https://leetcode.com/problems/reverse-linked-list/
+*/
+
+var reverseList = function(head) {
+    let p = head
+    let prev = null
+    while (p !== null){
+        let q = p.next
+        p.next = prev
+        prev = p
+        p = q
+    }
+    return prev
+};
+
+
+/*
+https://leetcode.com/problems/merge-two-sorted-lists/description/
+*/
+
+var mergeTwoLists = function(list1, list2) {
+    let currentNode = new ListNode(0, null)
+    let dummyNode = currentNode
+
+    while (list1 !== null && list2 !== null){
+        if (list1.val < list2.val){
+            currentNode.next = list1
+            list1 = list1.next
+        } 
+        else{
+            currentNode.next = list2
+            list2 = list2.next
+        }
+        currentNode = currentNode.next
+    }
+    currentNode.next = list1 || list2
+    return dummyNode.next
+
+};
+
+
+
+/*
+https://leetcode.com/problems/palindrome-linked-list/
+*/
+
+var isPalindrome = function(head) {
+    let slow = head;
+    let fast = head;
+    const stack = [];
+  
+    while (fast !== null && fast.next !== null) {
+      stack.push(slow.val);
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+  
+    // if the linked list had odd length, this will run
+    if (fast !== null) {
+      slow = slow.next;
+    }
+  
+    while (slow !== null) {
+      if (slow.val !== stack.pop()) {
+        return false;
+      }
+      slow = slow.next;
+    }
+  
+    return true;
+  }
