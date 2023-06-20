@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "Mern Stack",
+    "completed": false,
+    "description": "assignments"
+  },
+  {
+    "id": 2,
+    "title": "ML Project",
+    "completed": false,
+    "description": "Write report for the ML  project"
+  }
+]
