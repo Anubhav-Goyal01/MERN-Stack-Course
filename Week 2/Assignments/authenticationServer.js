@@ -33,5 +33,84 @@ const express = require("express")
 const PORT = 3000;
 const app = express();
 // write your logic here, DONT WRITE app.listen(3000) when you're running tests, the tests will automatically start the server
+app.use(express.json())
 
+
+let users = {};
+
+let id = 0
+app.post('/signup', (req, res) => {
+  let { username, password, firstName, lastName } = req.body;
+  const userExists = users.some(user => user.username === username);
+  if (userExists) {
+    res.sendStatus(400);
+  } else {
+    let newUser = {
+      id: id,
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName
+    };
+
+    users.push(newUser);
+    id += 1;
+
+    res.status(201).json("Signup successful");
+  }
+
+})
+
+app.post('/login', (req, res) => {
+  let { username, password } = req.body;
+  let userFound = null
+  users.forEach(user => {
+    if (user.username === username && user.password === password) {
+      userFound = user
+    }
+    if (userFound) {
+      res.json({
+        firstName: userFound.firstName,
+        lastName: userFound.lastName,
+        email: userFound.email
+      });
+    } else {
+      res.sendStatus(401);
+    }
+
+  })
+})
+
+app.use((req, res) => {
+  res.status(404).send("404 Not Found")
+})
+
+
+app.get("/data", (req, res) => {
+  let username = req.headers.username;
+  let password = req.headers.password;
+
+  let userFound = false
+  users.forEach(user => {
+    if (user.username === username && user.password === password) {
+      userFound = true
+    }
+
+    if (userFound) {
+      let usersToReturn = [];
+      users.forEach(user => {
+        usersToReturn.push({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.username
+        })
+      })
+      res.json({
+        users
+      });
+    } else {
+      res.sendStatus(401);
+    }
+  });
+})
 module.exports = app;
