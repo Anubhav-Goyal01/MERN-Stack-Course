@@ -79,7 +79,7 @@ app.post('/todos', (req, res) => {
   let {title, completed, description} = req.body
   id += 1
   createTODO(title, completed, description)
-  res.status(201).send({id: id})
+  res.status(201).send({id: id, title:title, description: description})
 })
 
 app.get('/todos', (req, res) => {
