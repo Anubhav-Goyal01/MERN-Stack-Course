@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken")
 const app = express();
 const mongoose = require('mongoose');
 
-// mongodb+srv://anubhav:<password>@cluster0.eldzzyy.mongodb.net/
 
 app.use(express.json());
 const secretKey = "secret_key"
@@ -53,7 +52,7 @@ const authenticateJwt = (req, res, next) => {
 }
 
 // change the password as per your mongodb atlas password
-mongoose.connect('mongodb+srv://anubhav:anubhav@cluster0.eldzzyy.mongodb.net/', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('url', {useNewUrlParser: true, useUnifiedTopology: true})
 
 // Admin routes
 app.post('/admin/signup', async (req, res) => {
