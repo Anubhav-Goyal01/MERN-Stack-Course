@@ -39,6 +39,7 @@ app.post('/admin/signup', (req, res) => {
   } else {
     ADMINS.push({username: username, password: password})
     res.json({message: 'Admin created successfully'})
+    console.log(ADMINS)
   }
 });
 

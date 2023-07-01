@@ -39,7 +39,8 @@ app.post('/admin/signup', (req, res) => {
   if (adminAlreadyExist){
     res.status(403).json({message: 'Admin already exists'})
   } else {
-    ADMINS.push({username: username, password: password})
+    const admin = {username: username, password: password}
+    ADMINS.push(admin)
     const token = generateJwt(admin)
     res.json({message: 'Admin created successfully', token: token})
   }
