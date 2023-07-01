@@ -96,7 +96,7 @@ app.post('/users/signup', (req, res) => {
   if (userAlreadyExist){
     res.status(403).json({message: 'User already exists'})
   } else {
-    const user = {username: username, password: password}
+    const user = {username: username, password: password, purchasedCourses: []}
     USERS.push(user)
     const token = generateJwt(user)
     res.json({message: 'User created successfully', token : token})
