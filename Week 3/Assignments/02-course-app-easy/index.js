@@ -105,7 +105,7 @@ app.post('/users/courses/:courseId', userAuthenticator, (req, res) => {
   const course = COURSES.find(c => c.id === id && c.published)
   if (course){
     const user = USERS.find(u => u.username === username)
-    user.purchasedCourses.push(courseId)
+    user.purchasedCourses.push(id)
     res.json({message: 'Course purchased successfully'})
   } else {
     res.status(404).json({message: 'Course not found'})
