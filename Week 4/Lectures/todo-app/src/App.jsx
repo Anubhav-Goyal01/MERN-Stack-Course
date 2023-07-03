@@ -1,41 +1,60 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-let todos = [
-  {
-    title: "Learn React",
-    description: "Learn ReactJS today",
-    id: 1,
-  },
-];
+function useTodos() {
+  const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/todos", { method: "GET" }).then((res) => {
+      res.json().then((data) => {
+        console.log(data);
+        setTodos(data);
+      });
+    });
+    setInterval(() => {
+      fetch("http://localhost:3000/todos", { method: "GET" }).then((res) => {
+        res.json().then((data) => {
+          console.log(data);
+          setTodos(data);
+        });
+      });
+    }, 1000);
+  }, []);
+  return todos;
+}
 
 function App() {
-  const [todo, setTodo] = useState(todos);
+  // const [counter, setCounter] = useState(Math.random()); // doesnt get updated on every render
+  // let nonStateVar = Math.random();
+  // console.log(todos);
+  // console.log(counter);
+  // console.log(nonStateVar);
 
-  setInterval(() => {
-    setTodo({
-      title: "Learn React",
-      description: "Learn ReactJS today",
-      id: 1,
-    });
-  }, 1000);
+  const todos = useTodos();
+
   return (
-    <>
-      <h5>Hi there</h5>
-      {todo.title}
-      {todo.description}
-      {todo.id}
-      <PersonName firstName={"Anubhav"} lastName={"Goyal"} />
-    </>
+    <div>
+      {todos.map((todo) => {
+        return (
+          <Todo
+            title={todo.title}
+            description={todo.description}
+            key={Math.random()}
+          />
+        );
+      })}
+    </div>
   );
 }
 
-function PersonName(props) {
-  const { firstName, lastName } = props;
+function Todo(props) {
   return (
-    <div>
-      {firstName} {lastName}
+    <div key={""}>
+      <h1>{props.title}</h1>
+      <p>{props.description}</p>
+      <br />
+      <button>Delete</button>
     </div>
   );
 }

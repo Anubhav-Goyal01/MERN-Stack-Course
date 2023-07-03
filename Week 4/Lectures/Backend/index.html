@@ -1,0 +1,104 @@
+<head>
+    <title>
+        TODO app
+    </title>
+</head>
+<script>   
+
+
+    function deletetodo (id) {
+        fetch("http://localhost:3000/todos/" + id, {
+            method: "DELETE"
+        }).then(() => {
+            console.log("Delete Done")
+        })
+    }
+
+    function inserttoDo(data){
+        let parentElement = document.getElementById("mainArea")
+        for (let i = 0; i < data.length; i++){
+            let childElement = document.createElement("div")
+            let gradChildElement1 = document.createElement("span")
+            gradChildElement1.innerHTML = data[i].title
+
+            let gradChildElement2 = document.createElement("span")
+            gradChildElement2.innerHTML = data[i].description
+
+            let gradChildElement3 = document.createElement("button")
+            gradChildElement3.innerHTML = "Delete"
+            gradChildElement3.setAttribute("onclick", "deletetodo(" + data[i].id + ")")
+
+            childElement.appendChild(gradChildElement1)
+            childElement.appendChild(gradChildElement2)
+            childElement.appendChild(gradChildElement3)
+
+
+            parentElement.appendChild(childElement)
+        }  
+    }
+
+    function getData(){
+        fetch("http://localhost:3000/todos", {
+            method: "GET"
+        }).then(resp => {
+            resp.json().then(data => {
+                inserttoDo(data)
+            })
+        })
+    }
+      
+    getData()
+    
+    function onPress() {
+        let title = document.getElementById("title").value
+        let description = document.getElementById("description").value
+        fetch("http://localhost:3000/todos", {
+            method: "POST",
+            body: JSON.stringify({
+                title: title,
+                description: description
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => {
+            res.json().then(data => {
+            let parentElement = document.getElementById("mainArea")
+            let childElement = document.createElement("div")
+            let gradChildElement1 = document.createElement("span")
+            gradChildElement1.innerHTML = data.title
+
+            let gradChildElement2 = document.createElement("span")
+            gradChildElement2.innerHTML = data.description
+
+            let gradChildElement3 = document.createElement("button")
+            gradChildElement3.innerHTML = "Delete"
+
+
+            childElement.appendChild(gradChildElement1)
+            childElement.appendChild(gradChildElement2)
+            childElement.appendChild(gradChildElement3)
+
+            gradChildElement3.onclick = function(){
+                fetch("http://localhost:3000/todos/" + data[i].id, {
+                    method: "DELETE"
+                }).then(callback)
+            }
+
+            parentElement.appendChild(childElement) 
+            })
+        })
+    }
+</script>
+<body>
+    Todo title
+    <input type="text" id="title"></input>
+    <br><br>
+    Todo description
+    <input type="text" id="description"></input>
+    <br><br>
+    <button onclick="onPress()">send todo</button>
+    <div id="mainArea">
+        
+    </div>
+</body>
