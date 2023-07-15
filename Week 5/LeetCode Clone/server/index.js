@@ -11,13 +11,10 @@ app.use(express.json());
 app.use("/admin", adminRouter);
 // app.use("/user", userRouter);
 
-mongoose.connect(
-  "mongodb+srv://anubhav:anubhav@cluster0.eldzzyy.mongodb.net/",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: "leetcode-clone",
-  }
-);
+mongoose.connect("YOUR_MONGODB_CONNECTION_STRING", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: "leetcode-clone",
+});
 
 app.listen(3000, () => console.log("Server running on port 3000"));
