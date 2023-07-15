@@ -1,7 +1,7 @@
 const express = require("express");
-const { User, Admin, Problem } = require("./database/index");
+const { User, Admin, Problem } = require("../db/index");
 const jwt = require("jsonwebtoken");
-const { authenticateJwt, SECRET } = require("./middlewares/auth");
+const { authenticateJwt, SECRET } = require("../middlewares/auth");
 
 const router = express.Router();
 
@@ -112,10 +112,10 @@ router.get("/problems/:id", authenticateJwt, async (req, res) => {
 
 router.put("/problems/:id", authenticateJwt, async (req, res) => {
   try {
-    const course = await Problem.findByIdAndUpdate(req.params.id, req.body, {
+    const problem = await Problem.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    if (course) {
+    if (problem) {
       res.json({ message: "Problem updated successfully" });
     } else {
       res.status(404).json({ message: "Problem not found" });
