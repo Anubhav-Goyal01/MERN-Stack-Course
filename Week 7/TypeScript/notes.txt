@@ -1,0 +1,4 @@
+Difference between types and interfaces:
+    - Interfaces can be implemented by classes
+    - Interfaces can extend each other
+    - Types can do unions and intersections

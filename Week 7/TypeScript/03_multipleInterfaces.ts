@@ -10,16 +10,21 @@ interface PersonInterface {
   genderProps: GenderProperties;
 }
 
-function greet(person: PersonInterface) {}
+interface AnimalInterface extends PersonInterface {
+  name: string;
+  furtype: string;
+}
 
-console.log(
-  greet({
-    name: "John",
-    age: 30,
-    genderProps: {
-      gender: "male",
-      orientation: "straight",
-      pronouns: "he/him",
-    },
-  })
-);
+// function greet(person: PersonInterface) {}
+
+// console.log(
+//   greet({
+//     name: "John",
+//     age: 30,
+//     genderProps: {
+//       gender: "male",
+//       orientation: "straight",
+//       pronouns: "he/him",
+//     },
+//   })
+// );
