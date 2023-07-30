@@ -35,3 +35,12 @@ function swap<T, U>(arg1: T, arg2: U): [U, T] {
 
 let ans5 = swap<number, string>(1, "b");
 let ans6 = swap<string, number>("a", 1);
+
+type Todo = {
+  title: string;
+  description: string;
+  completed: boolean;
+  id: number;
+};
+
+type updatedTodoInput = Partial<Todo>;
